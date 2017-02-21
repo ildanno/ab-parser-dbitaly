@@ -1,0 +1,29 @@
+{
+    "name": "antbank/ab-parser-dbitaly",
+    "description": "Parser for DeutscheBank Italy account balances",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Gianbruno Calcafava",
+            "email": "boombroono@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0",
+        "antbank/ab-reader": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Antbank\\AccountBalanceParser\\DbItaly\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AntbankTest\\AccountBalanceParser\\DbItaly\\": "test/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    }
+}

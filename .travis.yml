@@ -1,0 +1,10 @@
+language: php
+
+install:
+  - sudo apt-get update -y
+  - sudo apt-get install -y poppler-utils
+  - composer install
+
+php:
+  - '7.0'
+  - '7.1'
