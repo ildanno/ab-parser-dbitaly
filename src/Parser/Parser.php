@@ -33,6 +33,7 @@ class Parser implements ParserInterface
             $transaction = null;
             foreach ($this->strategies as $strategy) {
                 $result = $strategy->parse($iterator);
+                $iterator = $result->getIterator();
                 if ($result->isStopPropagation()) {
                     $transaction = $result->getResult();
                     $transactions[] = $transaction;
