@@ -79,9 +79,9 @@ class MovimentoMensileStrategy implements StrategyInterface
                 $iteratorSeekPoint = $iteratorSeekPoint ?? $iterator->key();
                 $iterator->next();
             } else {
+                $iterator->setSkipping(0);
                 break;
             }
-
         }
 
         if (!$found) {

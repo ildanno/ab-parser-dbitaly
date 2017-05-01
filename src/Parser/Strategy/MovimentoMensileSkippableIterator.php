@@ -87,6 +87,11 @@ class MovimentoMensileSkippableIterator implements \Iterator
         return $this->skipping;
     }
 
+    public function setSkipping(int $skipping)
+    {
+        $this->skipping = $skipping;
+    }
+
     public function increaseSkipping()
     {
         $this->skipping++;
