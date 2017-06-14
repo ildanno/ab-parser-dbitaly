@@ -2,8 +2,8 @@
 
 namespace Antbank\AccountBalanceParser\DbItaly\Parser\Strategy;
 
-use Antbank\AccountBalanceParser\DbItaly\Parser\ParserResponse;
-use Antbank\AccountBalanceParser\DbItaly\Transaction\Transaction;
+use Antbank\AccountBalanceReader\Parser\ParserResponse;
+use Antbank\AccountBalanceParser\DbItaly\Transaction\DeutscheBankCreditCardTransaction;
 
 class MovimentoMensileStrategy implements StrategyInterface
 {
@@ -24,7 +24,7 @@ class MovimentoMensileStrategy implements StrategyInterface
         ];
         $patternsIterator = new \ArrayIterator($patterns);
 
-        $result = new Transaction();
+        $result = new DeutscheBankCreditCardTransaction();
         $found = false;
         $iteratorSeekPoint = null;
         $dirtyRecords = $iterator->getSkipping();
@@ -46,8 +46,10 @@ class MovimentoMensileStrategy implements StrategyInterface
                         $iterator->next();
 
                         preg_match($patternsIterator->current(), $iterator->current(), $matches);
+                        if ($matches[1] ?? false) {
+                            $result->setCodiceRiferimento($result->getCodiceRiferimento() . ' ' . $matches[1]);
+                        }
 
-                        $result->setCodiceRiferimento($result->getCodiceRiferimento() . ' ' . $matches[1]);
                         $patternsIterator->next();
                         break;
 

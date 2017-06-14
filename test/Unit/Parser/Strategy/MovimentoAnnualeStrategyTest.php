@@ -1,9 +1,9 @@
 <?php
 
-namespace BoomBruno\DbMasterCardPdfReaderTest\Unit\Parser\Strategy;
+namespace AntbankTest\AccountBalanceParser\DbItaly\Unit\Parser\Strategy;
 
 use Antbank\AccountBalanceParser\DbItaly\Parser\Strategy\MovimentoAnnualeStrategy;
-use Antbank\AccountBalanceParser\DbItaly\Transaction\Transaction;
+use Antbank\AccountBalanceParser\DbItaly\Transaction\DeutscheBankCreditCardTransaction;
 use PHPUnit\Framework\TestCase;
 
 class MovimentoAnnualeStrategyTest extends TestCase
@@ -21,7 +21,7 @@ class MovimentoAnnualeStrategyTest extends TestCase
         $response = $strategy->parse($iterator);
 
         self::assertTrue($response->isStopPropagation());
-        self::assertInstanceOf(Transaction::class, $response->getResult());
+        self::assertInstanceOf(DeutscheBankCreditCardTransaction::class, $response->getResult());
 
         $transaction = $response->getResult();
 
@@ -47,7 +47,7 @@ class MovimentoAnnualeStrategyTest extends TestCase
         $response = $strategy->parse($iterator);
 
         self::assertTrue($response->isStopPropagation());
-        self::assertInstanceOf(Transaction::class, $response->getResult());
+        self::assertInstanceOf(DeutscheBankCreditCardTransaction::class, $response->getResult());
 
         $transaction = $response->getResult();
 

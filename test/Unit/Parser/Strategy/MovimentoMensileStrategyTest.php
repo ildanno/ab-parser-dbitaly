@@ -1,10 +1,10 @@
 <?php
 
-namespace BoomBruno\DbMasterCardPdfReaderTest\Unit\Parser\Strategy;
+namespace AntbankTest\AccountBalanceParser\DbItaly\Unit\Parser\Strategy;
 
-use Antbank\AccountBalanceParser\DbItaly\Parser\ParserResponse;
 use Antbank\AccountBalanceParser\DbItaly\Parser\Strategy\MovimentoMensileStrategy;
-use Antbank\AccountBalanceParser\DbItaly\Transaction\Transaction;
+use Antbank\AccountBalanceReader\Parser\ParserResponse;
+use Antbank\AccountBalanceParser\DbItaly\Transaction\DeutscheBankCreditCardTransaction;
 use PHPUnit\Framework\TestCase;
 
 class MovimentoMensileStrategyTest extends TestCase
@@ -23,7 +23,7 @@ class MovimentoMensileStrategyTest extends TestCase
         $response = $strategy->parse($iterator);
 
         self::assertInstanceOf(ParserResponse::class, $response);
-        self::assertInstanceOf(Transaction::class, $response->getResult());
+        self::assertInstanceOf(DeutscheBankCreditCardTransaction::class, $response->getResult());
         self::assertTrue($response->isStopPropagation());
         self::assertFalse($iterator->valid());
 
@@ -54,7 +54,7 @@ class MovimentoMensileStrategyTest extends TestCase
         $response = $strategy->parse($iterator);
 
         self::assertInstanceOf(ParserResponse::class, $response);
-        self::assertInstanceOf(Transaction::class, $response->getResult());
+        self::assertInstanceOf(DeutscheBankCreditCardTransaction::class, $response->getResult());
         self::assertTrue($response->isStopPropagation());
         self::assertTrue($iterator->valid());
 
@@ -101,7 +101,7 @@ class MovimentoMensileStrategyTest extends TestCase
         $response = $strategy->parse($iterator);
 
         self::assertInstanceOf(ParserResponse::class, $response);
-        self::assertInstanceOf(Transaction::class, $response->getResult());
+        self::assertInstanceOf(DeutscheBankCreditCardTransaction::class, $response->getResult());
         self::assertTrue($response->isStopPropagation());
         self::assertTrue($iterator->valid());
 

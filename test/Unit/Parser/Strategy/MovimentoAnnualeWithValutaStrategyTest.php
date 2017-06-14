@@ -1,10 +1,10 @@
 <?php
 
-namespace BoomBruno\DbMasterCardPdfReaderTest\Unit\Parser\Strategy;
+namespace AntbankTest\AccountBalanceParser\DbItaly\Unit\Parser\Strategy;
 
-use Antbank\AccountBalanceParser\DbItaly\Parser\ParserResponse;
 use Antbank\AccountBalanceParser\DbItaly\Parser\Strategy\MovimentoAnnualeWithValutaStrategy;
-use Antbank\AccountBalanceParser\DbItaly\Transaction\Transaction;
+use Antbank\AccountBalanceParser\DbItaly\Transaction\DeutscheBankCreditCardTransaction;
+use Antbank\AccountBalanceReader\Parser\ParserResponse;
 use PHPUnit\Framework\TestCase;
 
 class MovimentoAnnualeWithValutaStrategyTest extends TestCase
@@ -25,7 +25,7 @@ class MovimentoAnnualeWithValutaStrategyTest extends TestCase
         self::assertTrue($response->isStopPropagation());
         self::assertEquals('EOF', $response->getIterator()->current());
 
-        self::assertInstanceOf(Transaction::class, $response->getResult());
+        self::assertInstanceOf(DeutscheBankCreditCardTransaction::class, $response->getResult());
         $transaction = $response->getResult();
         self::assertEquals('12039812391280391283092 10293829', $transaction->getCodiceRiferimento());
         self::assertEquals('04/11/2016', $transaction->getDataAcquisto()->format('d/m/Y'));

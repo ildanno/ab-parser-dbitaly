@@ -3,6 +3,8 @@
 namespace Antbank\AccountBalanceParser\DbItaly\Parser;
 
 use Antbank\AccountBalanceParser\DbItaly\Parser\Strategy\StrategyInterface;
+use Antbank\AccountBalanceParser\DbItaly\Transaction\DeutscheBankCreditCardTransaction;
+use Antbank\AccountBalanceReader\Parser\ParserInterface;
 
 class Parser implements ParserInterface
 {
@@ -13,6 +15,7 @@ class Parser implements ParserInterface
 
     /**
      * Parser constructor.
+     *
      * @param StrategyInterface[] $strategies
      */
     public function __construct(array $strategies)
@@ -20,6 +23,11 @@ class Parser implements ParserInterface
         $this->strategies = $strategies;
     }
 
+    /**
+     * @param string $input
+     *
+     * @return DeutscheBankCreditCardTransaction[]
+     */
     public function parse(string $input): array
     {
         $lines = explode(PHP_EOL, $input);

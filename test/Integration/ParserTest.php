@@ -1,11 +1,10 @@
 <?php
 
-namespace AntbankTest\AccountBalanceParser\DbItaly\Unit\Parser;
+namespace AntbankTest\AccountBalanceParser\DbItaly\Integration;
 
 use Antbank\AccountBalanceParser\DbItaly\Parser\Parser;
 use Antbank\AccountBalanceParser\DbItaly\Parser\Strategy\MovimentoAnnualeStrategy;
 use Antbank\AccountBalanceParser\DbItaly\Parser\Strategy\MovimentoAnnualeWithValutaStrategy;
-use Antbank\AccountBalanceParser\DbItaly\Parser\Strategy\MovimentoMensileStrategy;
 use Antbank\AccountBalanceParser\DbItaly\Transaction\DeutscheBankCreditCardTransaction;
 use PHPUnit\Framework\TestCase;
 
@@ -13,9 +12,8 @@ class ParserTest extends TestCase
 {
     public function testParse()
     {
-        $data = file_get_contents(__DIR__ . '/../../data/mc-example.txt');
+        $data = file_get_contents(__DIR__ . '/../data/mc-example.txt');
         $parser = new Parser([
-            new MovimentoMensileStrategy(),
             new MovimentoAnnualeStrategy(),
             new MovimentoAnnualeWithValutaStrategy(),
         ]);

@@ -2,8 +2,8 @@
 
 namespace Antbank\AccountBalanceParser\DbItaly\Parser\Strategy;
 
-use Antbank\AccountBalanceParser\DbItaly\Parser\ParserResponse;
-use Antbank\AccountBalanceParser\DbItaly\Transaction\Transaction;
+use Antbank\AccountBalanceReader\Parser\ParserResponse;
+use Antbank\AccountBalanceParser\DbItaly\Transaction\DeutscheBankCreditCardTransaction;
 
 class MovimentoAnnualeStrategy implements StrategyInterface
 {
@@ -24,7 +24,7 @@ class MovimentoAnnualeStrategy implements StrategyInterface
             return new ParserResponse($iterator, null, false);
         }
 
-        $transaction = new Transaction();
+        $transaction = new DeutscheBankCreditCardTransaction();
         $transaction->setCodiceRiferimento($matches[1])
             ->setDataAcquisto(\DateTime::createFromFormat('d/m/Y', $matches[3]))
             ->setDataRegistrazione(\DateTime::createFromFormat('d/m/Y', $matches[4]))

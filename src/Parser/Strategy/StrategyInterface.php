@@ -2,7 +2,7 @@
 
 namespace Antbank\AccountBalanceParser\DbItaly\Parser\Strategy;
 
-use Antbank\AccountBalanceParser\DbItaly\Parser\ParserResponse;
+use Antbank\AccountBalanceReader\Parser\ParserResponse;
 
 interface StrategyInterface
 {

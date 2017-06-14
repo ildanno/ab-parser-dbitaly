@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+
+use Antbank\AccountBalanceParser\DbItaly\CreditCard\Parser\Parser;
+use Antbank\AccountBalanceParser\DbItaly\CreditCard\Parser\Strategy\MovimentoAnnualeStrategy;
+use Antbank\AccountBalanceParser\DbItaly\CreditCard\Parser\Strategy\MovimentoAnnualeWithValutaStrategy;
+use Antbank\AccountBalanceParser\DbItaly\CreditCard\Parser\Strategy\MovimentoMensileStrategy;
+use Antbank\AccountBalanceReader\Adapter\PopplerAdapter;
+use Antbank\AccountBalanceReader\Reader\Reader;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$adapter = new PopplerAdapter();
+$parser = new Parser([
+    new MovimentoAnnualeStrategy(),
+    new MovimentoAnnualeWithValutaStrategy(),
+    new MovimentoMensileStrategy(),
+]);
+
+$reader = new Reader(
+    $adapter,
+    $parser
+);
+
+$transactions = $reader->readFile($argv[1]);
+
+$format = "%s\t%s\t%s\t%s€\t%s\n";
+
+foreach ($transactions as $transaction) {
+    echo sprintf(
+        $format,
+        $transaction->getCodiceRiferimento(),
+        $transaction->getDataAcquisto()->format('d/m/Y'),
+        $transaction->getDataRegistrazione()->format('d/m/Y'),
+        $transaction->getImporto(),
+        $transaction->getDescrizioneOperazioni()
+    );
+}

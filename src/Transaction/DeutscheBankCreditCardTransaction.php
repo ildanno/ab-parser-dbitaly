@@ -4,7 +4,7 @@ namespace Antbank\AccountBalanceParser\DbItaly\Transaction;
 
 use Antbank\TransactionInterchange\TransactionInterface;
 
-class Transaction implements TransactionInterface
+class DeutscheBankCreditCardTransaction implements TransactionInterface
 {
     /**
      * @var string
@@ -66,9 +66,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param string $codiceRiferimento
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setCodiceRiferimento(string $codiceRiferimento): Transaction
+    public function setCodiceRiferimento(string $codiceRiferimento): DeutscheBankCreditCardTransaction
     {
         $this->codiceRiferimento = $codiceRiferimento;
         return $this;
@@ -84,9 +84,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param \DateTime $dataAcquisto
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setDataAcquisto(\DateTime $dataAcquisto): Transaction
+    public function setDataAcquisto(\DateTime $dataAcquisto): DeutscheBankCreditCardTransaction
     {
         $this->dataAcquisto = $dataAcquisto;
         return $this;
@@ -102,9 +102,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param \DateTime $dataRegistrazione
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setDataRegistrazione(\DateTime $dataRegistrazione): Transaction
+    public function setDataRegistrazione(\DateTime $dataRegistrazione): DeutscheBankCreditCardTransaction
     {
         $this->dataRegistrazione = $dataRegistrazione;
         return $this;
@@ -120,9 +120,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param string $descrizioneOperazioni
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setDescrizioneOperazioni(string $descrizioneOperazioni): Transaction
+    public function setDescrizioneOperazioni(string $descrizioneOperazioni): DeutscheBankCreditCardTransaction
     {
         $this->descrizioneOperazioni = $descrizioneOperazioni;
         return $this;
@@ -138,9 +138,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param float $acquisti
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setAcquisti(float $acquisti): Transaction
+    public function setAcquisti(float $acquisti): DeutscheBankCreditCardTransaction
     {
         $this->acquisti = $acquisti;
         return $this;
@@ -156,9 +156,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param float $pagamenti
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setPagamenti(float $pagamenti): Transaction
+    public function setPagamenti(float $pagamenti): DeutscheBankCreditCardTransaction
     {
         $this->pagamenti = $pagamenti;
         return $this;
@@ -174,9 +174,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param string $valuta
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setValuta(string $valuta): Transaction
+    public function setValuta(string $valuta): DeutscheBankCreditCardTransaction
     {
         $this->valuta = $valuta;
         return $this;
@@ -192,9 +192,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param float $importoValuta
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setImportoValuta(float $importoValuta): Transaction
+    public function setImportoValuta(float $importoValuta): DeutscheBankCreditCardTransaction
     {
         $this->importoValuta = $importoValuta;
         return $this;
@@ -210,9 +210,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param float $tassoCambio
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setTassoCambio(float $tassoCambio): Transaction
+    public function setTassoCambio(float $tassoCambio): DeutscheBankCreditCardTransaction
     {
         $this->tassoCambio = $tassoCambio;
         return $this;
@@ -228,9 +228,9 @@ class Transaction implements TransactionInterface
 
     /**
      * @param float $commissioniCambio
-     * @return Transaction
+     * @return DeutscheBankCreditCardTransaction
      */
-    public function setCommissioniCambio(float $commissioniCambio): Transaction
+    public function setCommissioniCambio(float $commissioniCambio): DeutscheBankCreditCardTransaction
     {
         $this->commissioniCambio = $commissioniCambio;
         return $this;
@@ -248,7 +248,7 @@ class Transaction implements TransactionInterface
      */
     public function getId(): string
     {
-        // TODO: Implement getId() method.
+        return $this->getCodiceRiferimento();
     }
 
     /**
@@ -258,7 +258,7 @@ class Transaction implements TransactionInterface
      */
     public function getDescription(): ?string
     {
-        // TODO: Implement getDescription() method.
+        return $this->getDescrizioneOperazioni();
     }
 
     /**
@@ -268,7 +268,7 @@ class Transaction implements TransactionInterface
      */
     public function getDate(): \DateTime
     {
-        // TODO: Implement getDate() method.
+        return $this->getDataAcquisto();
     }
 
     /**
@@ -278,7 +278,7 @@ class Transaction implements TransactionInterface
      */
     public function getRegisterDate(): ?\DateTime
     {
-        // TODO: Implement getRegisterDate() method.
+        return $this->getDataRegistrazione();
     }
 
     /**
@@ -288,7 +288,7 @@ class Transaction implements TransactionInterface
      */
     public function getCurrency(): ?string
     {
-        // TODO: Implement getCurrency() method.
+        return null;
     }
 
     /**
@@ -299,7 +299,7 @@ class Transaction implements TransactionInterface
      */
     public function getAmount(): float
     {
-        // TODO: Implement getAmount() method.
+        return $this->getPagamenti() ?: -1 * $this->getAcquisti();
     }
 
     /**
@@ -309,6 +309,6 @@ class Transaction implements TransactionInterface
      */
     public function getExtras(): array
     {
-        // TODO: Implement getExtras() method.
+        return [];
     }
 }
